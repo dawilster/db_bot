@@ -7,7 +7,7 @@ module Bot
     attr_accessor :response,
                   :when,
                   :table,
-                  :mode,
+                  :verb,
                   :query
 
     def self.perform(*args)
@@ -23,7 +23,7 @@ module Bot
 
       construct_entities
 
-      decide_mode
+      process_verb
 
     rescue BotException => e
       @response = e.message
@@ -41,24 +41,24 @@ module Bot
 
       @table = entities['table'][0]['value'] if entities['table']
       @query = entities['query'][0]['value'] if entities['query']
-      @mode  = entities['mode'][0]['value'] if entities['mode']
+      @verb  = entities['verb'][0]['value'] if entities['verb']
       @when  = ::DateTime.parse(entities['datetime'][0]['value']) if entities['datetime']
     end
 
-    def decide_mode
-      case @mode
+    def process_verb
+      case @verb
       when 'count'
         if @table && @query
-          return count_mode
+          return count_verb
         end
       end
 
       @response = "Please try again"
     end
 
-    ## Modes
+    ## Verbs
 
-    def count_mode
+    def count_verb
       find_class
 
       if @when
