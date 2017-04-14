@@ -7,10 +7,9 @@ Gem::Specification.new do |spec|
   spec.name          = "db_bot"
   spec.version       = DbBot::VERSION
   spec.authors       = ["William Porter"]
-  spec.email         = ["dawilster143@gmail.com"]
-
-  spec.summary       = "Bot for querying database"
-  spec.description   = "Uses NLP to create sql queries"
+  spec.email         = ["willports@gmail.com"]
+  spec.summary       = "Bot to interact with your database using plain english"
+  spec.description   = "DB Bot uses Natural Language Processing (NLP) to construct DB queries. What that means is you can interact with your database like you're talking to a human"
   spec.homepage      = "https://github.com/dawilster"
   spec.license       = "MIT"
 
