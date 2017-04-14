@@ -1,25 +1,51 @@
 require 'spec_helper'
 
-describe Bot do
+describe DbBot do
   describe 'self.message' do
-    subject{ Bot.message(message) }
+    subject{ DbBot.message(message) }
     let(:message) { 'hello world'}
+
+    before do
+      mock_model('User')
+    end
 
     it { expect(subject.response).to eq 'Please try again' }
 
-    context 'count' do
-      before do
-        mock_model('User')
+    context "class doesn't exist" do
+      let(:message) { 'how many dogs have been created?' }
+
+      it 'returns error' do
+        expect(subject.response).to eq 'Class cannot be found'
+      end
+    end
+
+    context 'return' do
+      let(:message) { 'return the 3 most recent users' }
+
+      context 'no users' do
+        before do
+          expect(User).to receive(:limit).and_return([])
+        end
+
+        it { expect(subject.response).to eq "There weren't any users" }
       end
 
-      context "class doesn't exist" do
-        let(:message) { 'how many dogs have been created?' }
+      context 'users exist' do
+        before do
+          expect(User).to receive(:limit).and_return([1, 2, 3])
+        end
 
-        it 'returns error' do
-          expect(subject.response).to eq 'Class cannot be found'
+        it 'returns collection' do
+          expect(subject.number).to eq 3
+          expect(subject.verb).to eq 'return'
+          expect(subject.table).to eq 'users'
+          expect(subject.response).to eq 'There you go'
+          expect(subject.collection.size).to eq 3
         end
       end
+    end
 
+    context 'count' do
       context 'all' do
         let(:message) { 'how many users have been created?' }
 
