@@ -1,3 +1,3 @@
-module Bot
+module DbBot
   VERSION = "0.1.0"
 end

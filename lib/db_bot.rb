@@ -1,7 +1,7 @@
-require "bot/version"
-require "bot/translate"
+require "db_bot/version"
+require "db_bot/translate"
 
-module Bot
+module DbBot
   def self.message(message)
     Translate.perform(message)
   end

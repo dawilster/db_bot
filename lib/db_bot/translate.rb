@@ -1,7 +1,7 @@
 require 'wit'
 require 'date'
 
-module Bot
+module DbBot
   class Translate
 
     attr_accessor :response,
@@ -25,14 +25,15 @@ module Bot
 
       process_verb
 
-    rescue BotException => e
+    rescue TranslateException => e
       @response = e.message
     end
 
     private
 
     def init_wit_client
-      @client = Wit.new(access_token: ENV['WIT_ACCESS_KEY'])
+      @client = Wit.new(access_token: 'RAS7ZDEPPJCGRTYONX7Q2UP6JOMY4OF2')
+      # @client = Wit.new(access_token: ENV['WIT_ACCESS_KEY'])
     end
 
     def construct_entities
@@ -74,10 +75,10 @@ module Bot
       @class = @table.singularize.camelize.constantize
 
     rescue NameError
-      raise BotException, 'Class cannot be found'
+      raise TranslateException, 'Class cannot be found'
     end
 
     ## Our own exception
-    class BotException < StandardError; end
+    class TranslateException < StandardError; end
   end
 end

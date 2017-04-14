@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'bot/version'
+require 'db_bot/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "bot"
-  spec.version       = Bot::VERSION
+  spec.name          = "db_bot"
+  spec.version       = DbBot::VERSION
   spec.authors       = ["William Porter"]
   spec.email         = ["dawilster143@gmail.com"]
 
