@@ -48,8 +48,12 @@ module Bot
     def decide_mode
       case @mode
       when 'count'
-        count_mode
+        if @table && @query
+          return count_mode
+        end
       end
+
+      @response = "Please try again"
     end
 
     ## Modes

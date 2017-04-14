@@ -3,6 +3,9 @@ require 'spec_helper'
 describe Bot do
   describe 'self.message' do
     subject{ Bot.message(message) }
+    let(:message) { 'hello world'}
+
+    it { expect(subject.response).to eq 'Please try again' }
 
     context 'count' do
       before do
