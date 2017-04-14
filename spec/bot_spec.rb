@@ -24,7 +24,7 @@ describe Bot do
         let(:message) { 'how many users have been created?' }
 
         it 'returns no. of users' do
-          expect(User).to receive(:length).and_return(1)
+          expect(User).to receive(:all).and_return([1])
 
           expect(subject.table).to eq 'users'
           expect(subject.query).to eq 'created'

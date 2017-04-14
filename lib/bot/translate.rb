@@ -62,9 +62,9 @@ module Bot
       find_class
 
       if @when
-        @response = @class.where('created_at >= ?', @when).length.to_s
+        @response = @class.where('created_at >= ?', @when).size.to_s
       else
-        @response = @class.length.to_s
+        @response = @class.all.size.to_s
       end
     end
 
