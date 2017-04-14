@@ -24,6 +24,9 @@ module Bot
       construct_entities
 
       decide_mode
+
+    rescue BotException => e
+      @response = e.message
     end
 
     private
@@ -65,7 +68,12 @@ module Bot
 
     def find_class
       @class = @table.singularize.camelize.constantize
+
+    rescue NameError
+      raise BotException, 'Class cannot be found'
     end
 
+    ## Our own exception
+    class BotException < StandardError; end
   end
 end

@@ -9,8 +9,16 @@ describe Bot do
         mock_model('User')
       end
 
+      context "class doesn't exist" do
+        let(:message) { 'how many dogs have been created?' }
+
+        it 'returns error' do
+          expect(subject.response).to eq 'Class cannot be found'
+        end
+      end
+
       context 'all' do
-        let(:message) { "how many users have been created?" }
+        let(:message) { 'how many users have been created?' }
 
         it 'returns no. of users' do
           expect(User).to receive(:length).and_return(1)
@@ -22,7 +30,7 @@ describe Bot do
       end
 
       context 'where' do
-        let(:message) { "how many users were created this week?" }
+        let(:message) { 'how many users were created this week?' }
 
         it 'returns no. of users' do
           expect(User).to receive(:where).and_return([1, 2])
