@@ -1,4 +1,4 @@
-# Bot
+# DB Bot
 
 DB Bot uses Natural Language Processing (NLP) to construct DB queries. What that means is you can interact with your database like you're talking to a human  
 **Here's an example**
